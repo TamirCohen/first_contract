@@ -6,7 +6,15 @@ contract Adoption{
     
     function adopt(uint petId) public returns (uint){
         require(petId >0 && petId < petNumber);
+        require(adopters[petId] == address(0));
         adopters[petId] = msg.sender;
+        return petId;
+    }
+
+    function readopt(uint petId) public returns (uint){
+        require(petId >0 && petId < petNumber);
+        require(adopters[petId] == msg.sender);
+        adopters[petId] = address(0);
         return petId;
     }
     
