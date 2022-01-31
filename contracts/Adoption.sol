@@ -5,15 +5,15 @@ contract Adoption{
     address[petNumber] public adopters;
     
     function adopt(uint petId) public returns (uint){
-        require(petId >0 && petId < petNumber);
-        require(adopters[petId] == address(0));
+        require(petId >=0 && petId < petNumber, "Index Out of range");
+        require(adopters[petId] == address(0), "Pet allready adopted");
         adopters[petId] = msg.sender;
         return petId;
     }
 
     function readopt(uint petId) public returns (uint){
-        require(petId >0 && petId < petNumber);
-        require(adopters[petId] == msg.sender);
+        require(petId >=0 && petId < petNumber, "Index Out of range");
+        require(adopters[petId] == msg.sender, "Pet not adopted by sender");
         adopters[petId] = address(0);
         return petId;
     }
